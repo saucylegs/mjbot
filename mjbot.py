@@ -69,7 +69,7 @@ async def on_message(message):
 
         await message.reply(f"I'm {reply}")
 
-    elif message.content.startswith(helpstring):
+    elif message.content.startswith(helpstring) or (type(message.channel) == discord.DMChannel and message.content.lower() == "help"):
         await message.reply(embed=discord.Embed.from_dict(helpembed))
 
 
