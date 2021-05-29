@@ -25,7 +25,7 @@ helpembed = {
         """
     }, {
         "name": "Links",
-        "value": "[Bot Invite Link](https://discord.com/api/oauth2/authorize?client_id=848031245619036221&scope=bot)"
+        "value": "[Bot Invite Link](https://discord.com/api/oauth2/authorize?client_id=848031245619036221&scope=bot) | [GitHub](https://github.com/saucylegs/mjbot)"
     }]
 }
 
