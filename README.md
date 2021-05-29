@@ -1,4 +1,4 @@
-# mjbot
+# MJ Bot
 I'm stuff
 
 ## About
