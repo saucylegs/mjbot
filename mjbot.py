@@ -54,7 +54,7 @@ async def on_message(message):
     match = matcher.search(message.content)
     if match:
         text = match.group(1)
-        doc = nlp(text)
+        doc = nlp(match.group(0))
         chunks = []
         for chunk in doc.noun_chunks:
             chunks.append(str(chunk))
