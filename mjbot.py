@@ -8,8 +8,8 @@ import os
 
 tester = re.compile("doing", flags=re.IGNORECASE)
 matcher = re.compile(r"\bdoing ([^\n\.?!]{3,})", flags=re.IGNORECASE)
-partialemote = re.compile(r"<a?:[A-z0-9-_]{2,32}:[0-9]{18}$") # For fixing an issue where the last > of an emoji code gets cut off
-helpstring = "<@iothwei9outhwnebstgwesi8o9thwu3s4eitgwy8iu94o5yh5twi4se.;/t>" # This is just gibberish because it will be overwritten later, and I don't want it to match anything until then
+partialemote = re.compile(r"(<a?:[A-z0-9-_]{2,32}:[0-9]{18}$)|(<(@|#|@&)!?[0-9]{18}$)") # For fixing an issue where the last > of an emoji or ping code gets cut off
+helpstring = re.compile("<@iothwei9outhwnebstgwesi8o9thwu3s4eitgwy8iu94o5yh5twi4se.;/t>") # This is just gibberish because it will be overwritten later, and I don't want it to match anything until then
 helpembed = {
     "title": "MJ Bot",
     "type": "rich",
@@ -38,7 +38,7 @@ client = discord.Client()
 async def on_ready():
     print(f"Logged in as {client.user}")
     global helpstring
-    helpstring = f"<@!{client.user.id}> help"
+    helpstring = re.compile(f"<@!?{client.user.id}> help")
     print(f"Bot is in {len(client.guilds)} servers")
     await client.change_presence(activity=discord.Game("I'm stuff"))
 
@@ -69,7 +69,7 @@ async def on_message(message):
 
         await message.reply(f"I'm {reply}")
 
-    elif message.content.startswith(helpstring) or (type(message.channel) == discord.DMChannel and message.content.lower() == "help"):
+    elif helpstring.match(message.content) or (type(message.channel) == discord.DMChannel and message.content.lower() == "help"):
         await message.reply(embed=discord.Embed.from_dict(helpembed))
 
 
