@@ -8,7 +8,7 @@ import os
 
 tester = re.compile("doing", flags=re.IGNORECASE)
 matcher = re.compile(r"\bdoing ([^\n\.?!]{3,})", flags=re.IGNORECASE)
-partialemote = re.compile(r"(<a?:[A-z0-9-_]{2,32}:[0-9]{18}$)|(<(@|#|@&)!?[0-9]{18}$)") # For fixing an issue where the last > of an emoji or ping code gets cut off
+partialemote = re.compile(r"(<a?:[A-z0-9-_]{2,32}:[0-9]{8,19}$)|(<(@|#|@&)!?[0-9]{8,19}$)") # For fixing an issue where the last > of an emoji or ping code gets cut off
 helpstring = re.compile("<@iothwei9outhwnebstgwesi8o9thwu3s4eitgwy8iu94o5yh5twi4se.;/t>") # This is just gibberish because it will be overwritten later, and I don't want it to match anything until then
 helpembed = {
     "title": "MJ Bot",
@@ -31,7 +31,9 @@ helpembed = {
 
 logging.basicConfig(level=logging.WARNING)
 nlp = spacy.load("en_core_web_sm")
-client = discord.Client()
+intents = discord.Intents.default()
+intents.message_content = True
+client = discord.Client(intents=intents)
 
 
 @client.event
